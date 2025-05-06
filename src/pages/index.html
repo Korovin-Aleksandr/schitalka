@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Считалка</title>
+  </head>
+  <body class="page">
+    <header class="header">
+      <h1 class="header__title">Считалка</h1>
+      <div class="header__container">
+        <p class="header__text">Всего расходов</p>
+        <p class="header__amount">123030</p>
+      </div>
+    </header>
+    <main class="content">
+      <section class="section__content">
+        <div class="section__container">
+          <h2 class="section__title">Предстоящие</h2>
+          <ul class="section__cards upcoming__cards-list">
+            <li class="card">
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section class="section__content">
+        <div class="section__container">
+          <h2 class="section__title">Сегодня</h2>
+          <ul class="section__cards today__cards-list">
+            
+          </ul>
+        </div>
+      </section>
+      <section class="section__content">
+        <div class="section__container">
+          <h2 class="section__title">Прошедшие</h2>
+          <ul class="section__cards overdue__cards-list">
+            
+        </div>
+      </section>
+      <button type="button" class="add__button">
+        <svg width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M20.575 10.22a.75.75 0 0 1 0 1.501H11.78v8.796a.75.75 0 1 1-1.5 0V11.72l-8.796.001a.75.75 0 0 1 0-1.5h8.797l-.001-8.796a.75.75 0 0 1 1.5 0v8.796h8.796Z" fill="#1C1C21"/>
+        </svg>
+        <p>Добавить расход</p>
+      </button>
+    </main>
+
+    <!-- <div class="modal" id="modal-container">
+      <div class="modal__container">
+        <button class="button__close">
+          <svg class="rotate-svg" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M20.575 10.22a.75.75 0 0 1 0 1.501H11.78v8.796a.75.75 0 1 1-1.5 0V11.72l-8.796.001a.75.75 0 0 1 0-1.5h8.797l-.001-8.796a.75.75 0 0 1 1.5 0v8.796h8.796Z" fill="#1C1C21"/>
+          </svg>
+        </button>
+        <div class="modal__content">
+          <div class="modal__add-new-cards">
+            <h2 class="modal__title">Новый расход</h2>
+            <form class="modal__form" name="card-form">
+              <label class="modal__label">
+                <input 
+                  type="text" 
+                  name="price" 
+                  class="modal__input modal__input__price"
+                  placeholder="Сумма">
+              </label>
+              <label class="modal__label">
+                <input 
+                  type="text" 
+                  name="date" 
+                  class="modal__input modal__input__date"
+                  placeholder="Дата">
+              </label>
+              <label class="modal__label">
+                <input 
+                  type="text" 
+                  name="name" 
+                  class="modal__input modal__input__name"
+                  placeholder="Название">
+              </label>
+              <label class="modal__label">
+                <input 
+                  type="text" 
+                  name="description" 
+                  class="modal__input modal__input__description"
+                  placeholder="Описание"
+                >
+              </label>
+            </form>
+            <span class="form__errors"></span>
+            <button type="submit" class="modal__button button">Add</button>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="modal" id="modal-container">
+      <div class="modal__container">
+        <button class="button__close">
+          <svg class="rotate-svg" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M20.575 10.22a.75.75 0 0 1 0 1.501H11.78v8.796a.75.75 0 1 1-1.5 0V11.72l-8.796.001a.75.75 0 0 1 0-1.5h8.797l-.001-8.796a.75.75 0 0 1 1.5 0v8.796h8.796Z" fill="#1C1C21"/>
+          </svg>
+        </button>
+        <div class="modal__content">
+          
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="modal" id="modal-container">
+      <div class="modal__container">
+        <button class="button__close">
+          <svg class="rotate-svg" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M20.575 10.22a.75.75 0 0 1 0 1.501H11.78v8.796a.75.75 0 1 1-1.5 0V11.72l-8.796.001a.75.75 0 0 1 0-1.5h8.797l-.001-8.796a.75.75 0 0 1 1.5 0v8.796h8.796Z" fill="#1C1C21"/>
+          </svg>
+        </button>
+        <div class="modal__content">
+          <div class="modal_preview-card">
+            <h2 class="modal__title">Rent</h2>
+            <p class="card__description">Здесь находится описания расхода</p>
+            <p class="card__date">03.03.03</p>
+            <p class="card__price">RUB 200</p>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <template id="modal__add">
+      <div class="modal__add-new-cards">
+        <h2 class="modal__title">Новый расход</h2>
+        <form class="modal__form" name="card-form">
+          <label class="modal__label">
+            <input 
+              type="text" 
+              name="price" 
+              class="modal__input modal__input__price"
+              placeholder="Сумма">
+          </label>
+          <label class="modal__label">
+            <input 
+              type="text" 
+              name="date" 
+              class="modal__input modal__input__date"
+              placeholder="Дата">
+          </label>
+          <label class="modal__label">
+            <input 
+              type="text" 
+              name="name" 
+              class="modal__input modal__input__name"
+              placeholder="Название">
+          </label>
+          <label class="modal__label">
+            <input 
+              type="text" 
+              name="description" 
+              class="modal__input modal__input__description"
+              placeholder="Описание"
+            >
+          </label>
+          <span class="form__errors"></span>
+          <button type="submit" class="modal__button button">Add</button>
+         </form>
+      </div>
+    </template>
+
+    <template id="modal__change">
+      <div class="modal__change-cards">
+        <h2 class="modal__title">Новый расход</h2>
+        <form class="modal__form" name="card-form">
+          <label class="modal__label">
+            <input 
+              type="text" 
+              name="price" 
+              class="modal__input modal__input__price"
+              placeholder="Сумма">
+          </label>
+          <label class="modal__label">
+            <input 
+              type="text" 
+              name="date" 
+              class="modal__input modal__input__date"
+              placeholder="Дата">
+          </label>
+          <label class="modal__label">
+            <input 
+              type="text" 
+              name="name" 
+              class="modal__input modal__input__name"
+              placeholder="Название">
+          </label>
+          <label class="modal__label">
+            <input 
+              type="text" 
+              name="description" 
+              class="modal__input modal__input__description"
+              placeholder="Описание"
+            >
+          </label>
+          <span class="form__errors"></span>
+          <button type="submit" class="modal__button button">Change</button>
+         </form>
+      </div>
+    </template>
+   
+    <template id="card_preview">
+      <div class="modal_preview-card">
+        <h2 class="card__title">Rent</h2>
+        <p class="card__description">Здесь находится описания расхода</p>
+        <p class="card__date">03.03.03</p>
+        <p class="card__price">RUB 200</p>
+      </div>
+    </template>
+
+    <template class="card-template">
+      <li class="card">
+        <div class="card__container">
+          <button type="button" class="card__delete-button button">
+            <svg width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="48" height="48" rx="8" fill="#EDF0F2"/><g clip-path="url(#a)">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M28.28 21.22a.75.75 0 0 1 0 1.06l-5.25 5.25a.75.75 0 0 1-1.06 0l-2.25-2.25a.75.75 0 1 1 1.06-1.06l1.72 1.72 4.72-4.72a.75.75 0 0 1 1.06 0ZM33.75 24c0 5.385-4.365 9.75-9.75 9.75s-9.75-4.365-9.75-9.75 4.365-9.75 9.75-9.75c5.382.006 9.744 4.368 9.75 9.75Zm-1.5 0A8.25 8.25 0 1 0 24 32.25 8.26 8.26 0 0 0 32.25 24Z" fill="#1C1C21"/>
+              </g><defs><clipPath id="a"><path fill="#fff" transform="translate(12 12)" d="M0 0h24v24H0z"/></clipPath></defs>
+            </svg>
+          </button>
+          <div class="card__content">
+            <h2 class="card__title">Rent</h2>
+            <p class="card__price">RUB 200</p>
+          </div>
+          <button type="button" class="card__change-button button">
+            <svg width="19" height="19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M18.31 4.878 14.122.688a1.5 1.5 0 0 0-2.122 0L.44 12.25c-.283.28-.441.662-.44 1.06v4.19A1.5 1.5 0 0 0 1.5 19h4.19c.398.001.78-.157 1.06-.44L18.31 7a1.5 1.5 0 0 0 0-2.122ZM5.69 17.5H1.5v-4.19l8.25-8.25 4.19 4.19-8.25 8.25ZM15 8.189 10.81 4l2.25-2.25 4.19 4.189L15 8.189Z" fill="#1C1C21"/>
+            </svg>
+          </button> 
+        </div>
+      </li>
+    </template>
+
+    <template id="card-list">
+      <div class="card__container">
+        <button type="button" class="card__delete-button button">
+          <svg width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="48" height="48" rx="8" fill="#EDF0F2"/><g clip-path="url(#a)">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M28.28 21.22a.75.75 0 0 1 0 1.06l-5.25 5.25a.75.75 0 0 1-1.06 0l-2.25-2.25a.75.75 0 1 1 1.06-1.06l1.72 1.72 4.72-4.72a.75.75 0 0 1 1.06 0ZM33.75 24c0 5.385-4.365 9.75-9.75 9.75s-9.75-4.365-9.75-9.75 4.365-9.75 9.75-9.75c5.382.006 9.744 4.368 9.75 9.75Zm-1.5 0A8.25 8.25 0 1 0 24 32.25 8.26 8.26 0 0 0 32.25 24Z" fill="#1C1C21"/>
+            </g><defs><clipPath id="a"><path fill="#fff" transform="translate(12 12)" d="M0 0h24v24H0z"/></clipPath></defs>
+          </svg>
+        </button>
+        <div class="card__content">
+          <h2 class="card__title">Rent</h2>
+          <p class="card__price">RUB 200</p>
+        </div>
+        <button type="button" class="card__change-button button">
+          <svg width="19" height="19" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M18.31 4.878 14.122.688a1.5 1.5 0 0 0-2.122 0L.44 12.25c-.283.28-.441.662-.44 1.06v4.19A1.5 1.5 0 0 0 1.5 19h4.19c.398.001.78-.157 1.06-.44L18.31 7a1.5 1.5 0 0 0 0-2.122ZM5.69 17.5H1.5v-4.19l8.25-8.25 4.19 4.19-8.25 8.25ZM15 8.189 10.81 4l2.25-2.25 4.19 4.189L15 8.189Z" fill="#1C1C21"/>
+          </svg>
+        </button> 
+      </div>
+    </template>
+  </body>
+</html>

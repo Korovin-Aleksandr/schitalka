@@ -1,0 +1,6 @@
+.modal__container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px
+}

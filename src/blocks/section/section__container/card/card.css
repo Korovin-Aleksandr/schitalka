@@ -1,0 +1,5 @@
+@import url('./card__container/card__container.css');
+
+.card {
+  padding-left: 10px;
+}

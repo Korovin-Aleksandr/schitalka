@@ -1,0 +1,17 @@
+@import url('./card__change-button/card__change-button.css');
+@import url('./card__complete-button/card__complete-button.css');
+@import url('./card__content/card__price/card__price.css');
+@import url('./card__content/card__title/card__title.css');
+@import url('./card__description/card__description.css');
+@import url('./card__header/card__header.css');
+@import url('./card__date/card__date.css');
+
+
+.card__container {
+  display: grid;
+  grid-template-columns: 48px 1fr 48px;
+  grid-template-rows: 72px;
+  gap: 15px;
+  align-items: center;
+  
+}
