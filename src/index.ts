@@ -38,6 +38,9 @@ events.on("update:cards", () => {
     card.prewiew = product;
     page.gallery.append(card.render());
   });
+
+  cardList.calculatingAmount();
+  page.setAmount(cardList.getAmount());
 });
 
 //отерытие мадалки добавления карточки

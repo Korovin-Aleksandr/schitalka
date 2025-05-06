@@ -44,5 +44,11 @@ export class CardListData implements ICardsListData {
       this.events.emit("update:cards");
     }
   }
-  // calculatingAmount()
+  calculatingAmount(): void {
+    this.amount = this.items.reduce((acc, item) => acc + item.price, 0);
+  }
+  
+  getAmount(): number {
+    return this.amount;
+  }
 }

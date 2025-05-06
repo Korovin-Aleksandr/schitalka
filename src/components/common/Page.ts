@@ -1,4 +1,3 @@
-import { ICard } from "../../types";
 import { Component } from "../base/Component";
 import { IEvents } from "../base/events";
 
@@ -23,5 +22,9 @@ export class Page extends Component<IPage> {
     this.buttonAdd.addEventListener('click', () => {
 			this.events.emit('modal:open');
 		});
+  }
+
+  setAmount(amount: number) {
+    this.amountCard.textContent = `${amount} ₽`;
   }
 }
