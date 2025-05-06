@@ -46,6 +46,7 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "flatpickr": "^4.6.13",
     "validate.js": "^0.13.1"
   }
 }

@@ -3,6 +3,7 @@ import { BaseForm } from "../base/BaseForm";
 
 export class CardAddModal extends BaseForm {
   protected inputs: NodeListOf<HTMLInputElement>;
+  protected dateInput: HTMLInputElement;
   protected buttonSubmit: HTMLButtonElement;
   protected form: HTMLFormElement;
 
@@ -12,6 +13,11 @@ export class CardAddModal extends BaseForm {
     this.inputs =
       this.container.querySelectorAll<HTMLInputElement>(".modal__input");
     this.buttonSubmit = container.querySelector(".modal__button");
+    this.dateInput = this.container.querySelector<HTMLInputElement>('input[name="date"]');
+
+    this.dateInput.addEventListener("click", () => {
+      this.events.emit("calendar:open", { input: this.dateInput });
+    });
 
     this.initialize();
   }
@@ -68,6 +74,5 @@ export class CardAddModal extends BaseForm {
   resetForm(): void {
     this.form.reset(); 
     this.setDisabled(this.buttonSubmit, true); 
-
   }
 }

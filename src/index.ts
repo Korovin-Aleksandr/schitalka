@@ -4,14 +4,16 @@ import { Page } from "./components/common/Page";
 import { ModalContainer } from "./components/common/ModalContainer";
 import { CardAddModal } from "./components/common/CardAddModal";
 import { ensureElement, cloneTemplate } from "./utils/utils";
-import { CardListData } from './components/CardsListData';
-import { ICard } from './types';
-import { CardListItem } from './components/common/CardList';
-import { CardChangeModal } from './components/common/CardChangeModal';
+import { CardListData } from "./components/CardsListData";
+import { ICard } from "./types";
+import { CardListItem } from "./components/common/CardList";
+import { CardChangeModal } from "./components/common/CardChangeModal";
+import flatpickr from "flatpickr";
+import { Russian } from "flatpickr/dist/l10n/ru";
 
 const events = new EventEmitter();
 
-const cardList = new CardListData(events)
+const cardList = new CardListData(events);
 const page = new Page(document.querySelector(".page"), events);
 const modal = new ModalContainer(
   document.querySelector("#modal-container"),
@@ -19,11 +21,14 @@ const modal = new ModalContainer(
 );
 
 const cardAddTemplate = ensureElement<HTMLTemplateElement>("#modal__add");
-const cardChangeTemplate = ensureElement<HTMLTemplateElement>("#modal__change")
-const cardListTemplate = ensureElement<HTMLTemplateElement>("#card-list")
+const cardChangeTemplate = ensureElement<HTMLTemplateElement>("#modal__change");
+const cardListTemplate = ensureElement<HTMLTemplateElement>("#card-list");
 
 const cardAdd = new CardAddModal(cloneTemplate(cardAddTemplate), events);
-const cardChange = new CardChangeModal(cloneTemplate(cardChangeTemplate), events)
+const cardChange = new CardChangeModal(
+  cloneTemplate(cardChangeTemplate),
+  events
+);
 
 events.onAll(({ eventName, data }) => {
   console.log(eventName, data);
@@ -56,7 +61,7 @@ events.on("card:add", (card: ICard) => {
 });
 
 //удаление карточки
-events.on("card:delete", (data: { id: string}) => {
+events.on("card:delete", (data: { id: string }) => {
   const { id } = data;
   const card = cardList.items.find((item) => item.id === id);
   cardList.deleteCard(card);
@@ -75,4 +80,25 @@ events.on("modal-chenge:open", (data: { id: string }) => {
 events.on("card:change", (data: ICard) => {
   cardList.updateCard(data);
   modal.close();
+});
+
+//открытие календаря
+events.on("calendar:open", ({ input }: { input: HTMLInputElement }) => {
+  const inputWithPicker = input as HTMLInputElement & {
+    _flatpickr?: flatpickr.Instance;
+  };
+
+  if (inputWithPicker._flatpickr) {
+    inputWithPicker._flatpickr.destroy();
+  }
+
+  flatpickr(input, {
+    locale: Russian,
+    dateFormat: "d.m.Y",
+    allowInput: true,
+    closeOnSelect: true,
+    onClose: function () {
+      this.destroy();
+    },
+  });
 });
