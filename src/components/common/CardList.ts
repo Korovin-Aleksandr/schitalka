@@ -20,6 +20,7 @@ export class CardListItem extends Component<ICardList> {
   protected itemPrice: HTMLElement;
   protected itemId: string;
   protected itemButtonChange: HTMLButtonElement;
+  protected cardPrewiewButton: HTMLElement;
   protected events: IEvents;  
 
   constructor(container: HTMLElement, events: IEvents) {
@@ -29,6 +30,7 @@ export class CardListItem extends Component<ICardList> {
     this.itemTitle = container.querySelector('.card__title');
     this.itemPrice = container.querySelector('.card__price');
     this.itemButtonChange = container.querySelector('.card__change-button')
+    this.cardPrewiewButton = container.querySelector('.card__content')
     this.deleteItem = container.querySelector('.card__delete-button')
 
     this.deleteItem.addEventListener('click', () => {
@@ -37,6 +39,9 @@ export class CardListItem extends Component<ICardList> {
     this.itemButtonChange.addEventListener('click', () => {
       this.events.emit('modal-chenge:open', { id: this.itemId })
     })
+    this.cardPrewiewButton.addEventListener('click', () => {
+      this.events.emit('modal:preview:open', { id: this.itemId });
+    });
   }
 
   set prewiew({

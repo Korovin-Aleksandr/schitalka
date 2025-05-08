@@ -5,6 +5,7 @@
 @import url('./card__description/card__description.css');
 @import url('./card__header/card__header.css');
 @import url('./card__date/card__date.css');
+@import url('./card__content/card__content.css');
 
 
 .card__container {
@@ -13,5 +14,5 @@
   grid-template-rows: 72px;
   gap: 15px;
   align-items: center;
-  
+  padding: 0 10px 0 10px;
 }

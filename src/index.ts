@@ -11,6 +11,7 @@ import { CardChangeModal } from "./components/common/CardChangeModal";
 import flatpickr from "flatpickr";
 import { Russian } from "flatpickr/dist/l10n/ru";
 import { cards } from "./components/common/cards";
+import { CardPrewiewModal } from "./components/common/CardPrewiewModal";
 
 const events = new EventEmitter();
 
@@ -25,7 +26,10 @@ const cardAddTemplate = ensureElement<HTMLTemplateElement>("#modal__add");
 const cardChangeTemplate = ensureElement<HTMLTemplateElement>("#modal__change");
 const cardListTemplate = ensureElement<HTMLTemplateElement>("#card");
 const dateTitleTemplate = ensureElement<HTMLTemplateElement>("#date-title");
+const cardPreviewTemplate = ensureElement<HTMLTemplateElement>("#card_preview");
 
+
+const cardPreview = new CardPrewiewModal(cloneTemplate(cardPreviewTemplate), events);
 const cardAdd = new CardAddModal(cloneTemplate(cardAddTemplate), events);
 const cardChange = new CardChangeModal(
   cloneTemplate(cardChangeTemplate),
@@ -116,6 +120,16 @@ events.on("calendar:open", ({ input }: { input: HTMLInputElement }) => {
       this.destroy();
     },
   });
+});
+
+events.on("modal:preview:open", (data: { id: string }) => {
+  const card = cardList.cardList.find((item) => item.id === data.id);
+  if (card) {
+    cardPreview.setCard(card);
+    modal.modalContent.innerHTML = ""; // очищаем
+    modal.modalContent.append(cardPreview.render());
+    modal.open();
+  }
 });
 
 // //тестовый списко
