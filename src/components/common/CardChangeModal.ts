@@ -99,7 +99,6 @@ export class CardChangeModal extends BaseForm {
       }
     });
   
-    // сохраняем id редактируемой карточки
     this.container.dataset.cardId = card.id;
     this.toggleSubmitButton();
   }

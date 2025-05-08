@@ -1,5 +1,4 @@
 import { ICardList } from "../../types";
-import { cloneTemplate } from "../../utils/utils";
 import { Component } from "../base/Component";
 import { IEvents } from "../base/events";
 
@@ -11,21 +10,6 @@ export class CardList extends Component<ICardList> {
     super(container)
     this.events = events;
     this.upcomingList = container.querySelector('.upcoming__cards-list')
-  }
-
-  renderUpcomingList(
-    items: any[],
-    itemTemplate: HTMLTemplateElement,
-    componentClass: typeof CardListItem
-  ) {
-    this.upcomingList.innerHTML = '';
-    items.forEach((itemData) => {
-      const itemComponent = new componentClass(
-        cloneTemplate(itemTemplate),
-        this.events
-      )
-      this.upcomingList.append(itemComponent.render())
-    })
   }
 }
 

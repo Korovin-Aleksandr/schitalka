@@ -2,9 +2,7 @@
 @import url('./section__cards/section__cards.css');
 @import url('./card/card.css');
 
-.section__container {
-  width: 375px;
-  display: flex;
-  flex-direction: column;
-}
-
+.content_list {
+    max-height: 667px;
+    overflow-y: auto;
+  }

@@ -10,6 +10,7 @@ import { CardListItem } from "./components/common/CardList";
 import { CardChangeModal } from "./components/common/CardChangeModal";
 import flatpickr from "flatpickr";
 import { Russian } from "flatpickr/dist/l10n/ru";
+import { cards } from "./components/common/cards";
 
 const events = new EventEmitter();
 
@@ -22,7 +23,8 @@ const modal = new ModalContainer(
 
 const cardAddTemplate = ensureElement<HTMLTemplateElement>("#modal__add");
 const cardChangeTemplate = ensureElement<HTMLTemplateElement>("#modal__change");
-const cardListTemplate = ensureElement<HTMLTemplateElement>("#card-list");
+const cardListTemplate = ensureElement<HTMLTemplateElement>("#card");
+const dateTitleTemplate = ensureElement<HTMLTemplateElement>("#date-title");
 
 const cardAdd = new CardAddModal(cloneTemplate(cardAddTemplate), events);
 const cardChange = new CardChangeModal(
@@ -34,19 +36,32 @@ events.onAll(({ eventName, data }) => {
   console.log(eventName, data);
 });
 
+
 //рендер списка карточек
 events.on("update:cards", () => {
   page.gallery.innerHTML = "";
-  cardList.items.forEach((product) => {
-    const clonedTemplate = cloneTemplate(cardListTemplate);
-    const card = new CardListItem(clonedTemplate, events);
-    card.prewiew = product;
-    page.gallery.append(card.render());
+
+  const groupedByDate = cardList.groupByDate();
+
+  Object.entries(groupedByDate).forEach(([date, cards]) => {
+    // клонируем заголовок даты из шаблона
+    const titleEl = cloneTemplate(dateTitleTemplate);
+    titleEl.textContent = date;
+    page.gallery.append(titleEl);
+
+    // добавляем карточки
+    cards.forEach((product) => {
+      const clonedTemplate = cloneTemplate(cardListTemplate);
+      const card = new CardListItem(clonedTemplate, events);
+      card.prewiew = product;
+      page.gallery.append(card.render());
+    });
   });
 
   cardList.calculatingAmount();
   page.setAmount(cardList.getAmount());
 });
+
 
 //отерытие мадалки добавления карточки
 events.on("modal:open", () => {
@@ -63,13 +78,13 @@ events.on("card:add", (card: ICard) => {
 //удаление карточки
 events.on("card:delete", (data: { id: string }) => {
   const { id } = data;
-  const card = cardList.items.find((item) => item.id === id);
+  const card = cardList.cardList.find((item) => item.id === id);
   cardList.deleteCard(card);
 });
 
 //открытие окна изменения
 events.on("modal-chenge:open", (data: { id: string }) => {
-  const card = cardList.items.find((item) => item.id === data.id);
+  const card = cardList.cardList.find((item) => item.id === data.id);
   if (card) {
     cardChange.fillForm(card); // метод, который мы добавим
     modal.modalContent.append(cardChange.render());
@@ -102,3 +117,12 @@ events.on("calendar:open", ({ input }: { input: HTMLInputElement }) => {
     },
   });
 });
+
+// //тестовый списко
+cardList.setCardList({
+  id: "init",
+  items: cards,
+  amount: 0
+});
+
+events.emit("update:cards");

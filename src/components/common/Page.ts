@@ -10,6 +10,7 @@ export class Page extends Component<IPage> {
   protected amountCard: HTMLElement;
   protected buttonAdd: HTMLButtonElement;
   gallery: HTMLElement;
+  dataList: HTMLElement
   protected events: IEvents;
 
   constructor(container: HTMLElement, events: IEvents) {
@@ -17,7 +18,8 @@ export class Page extends Component<IPage> {
     this.events = events;
     this.amountCard = container.querySelector('.header__amount');
     this.buttonAdd = container.querySelector('.add__button');
-    this.gallery = container.querySelector('.upcoming__cards-list')
+    this.gallery = container.querySelector('.upcoming__cards-list');
+
 
     this.buttonAdd.addEventListener('click', () => {
 			this.events.emit('modal:open');
