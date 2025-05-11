@@ -8,6 +8,7 @@
   width: 375px;
   height: 667px;
   background-color: #FAFAFA;
+  border: 1px solid #D6D6DE;
 }
 
 
@@ -17,4 +18,11 @@
 
 .rotate-svg {
   transform: rotate(45deg);
+}
+
+.modal_preview-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  word-wrap: break-word;
 }

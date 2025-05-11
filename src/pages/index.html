@@ -52,14 +52,14 @@
         <form class="modal__form" name="card-form">
           <label class="modal__label">
             <input 
-              type="text" 
+              type="number"  
               name="price" 
               class="modal__input modal__input__price"
               placeholder="Сумма">
           </label>
           <label class="modal__label">
             <input 
-              type="text" 
+              type="date"  
               name="date" 
               class="modal__input modal__input__date"
               placeholder="Дата">
@@ -69,6 +69,8 @@
               type="text" 
               name="name" 
               class="modal__input modal__input__name"
+              pattern="[\p{L}\d\s.,!?()-]+"
+              title="Допустимы буквы и цифры"
               placeholder="Название">
           </label>
           <label class="modal__label">
@@ -76,6 +78,8 @@
               type="text" 
               name="description" 
               class="modal__input modal__input__description"
+              pattern="[\p{L}\d\s.,!?()-]+"
+              title="Допустимы буквы и цифры"
               placeholder="Описание"
             >
           </label>

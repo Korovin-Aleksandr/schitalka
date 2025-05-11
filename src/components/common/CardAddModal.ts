@@ -31,7 +31,9 @@ export class CardAddModal extends BaseForm {
     });
 
     this.inputs.forEach((input) => {
-      input.addEventListener("input", () => this.toggleSubmitButton());
+      input.addEventListener("input", () => {
+        this.toggleSubmitButton();
+      });
     });
   }
 
